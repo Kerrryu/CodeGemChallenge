@@ -1,3 +1,6 @@
+// Started Challenge at 5:00pm EST Monday, May 16, 2022
+// Sebastian Maj
+
 const express = require("express");
 const app = express();
 const cors = require("cors");

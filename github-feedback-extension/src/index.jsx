@@ -95,12 +95,13 @@ const App = () => {
                     <Container flex>
                         <TagSelector dismissOverride={false} onTagClicked={onTagClicked} selected={tags} />
                     </Container>
-                </CardSection>
-                <CardSection>
-                    <CardInfo>Your findings</CardInfo>
-                    <CustomContainer bordered>
+                    {
+                    tags.filter(t => t.active).length > 0 ? (
+                    <CustomContainer>
                         <TagSelector dismissOverride={true} onTagRemoved={removeTag} selected={tags.filter(t => !!t.active)} />
                     </CustomContainer>
+                    ) : null
+                    }
                 </CardSection>
                 <CardSection>
                     <CardInfo>Would you like to share more?</CardInfo>

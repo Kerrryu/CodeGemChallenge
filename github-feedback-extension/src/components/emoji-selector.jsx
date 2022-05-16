@@ -85,10 +85,14 @@ export const Selector = ({ selected, onEmojiRemoved, addEmoji, error }) => {
                         {hovered ? `${capitalizeFirst(hovered)}` : 'Mood'}
                     </TooltipContentHeader>
                     <TooltipContentBody>
-                        {Object.keys(Emojis).map(k => (
+                        {Object.keys(Emojis).map(k => 
+                            selected.indexOf(Emojis[k]) < 0 ?
+                            (
                             <TooltipContentEmojiWrapper onClick={e => addEmoji(Emojis[k])} onMouseOut={e => onHover(null)} onMouseOver={e => onHover(Emojis[k].display)}>
                                 <Emoji emoji={Emojis[k].value} />
-                            </TooltipContentEmojiWrapper>))}
+                            </TooltipContentEmojiWrapper>
+                            ) : null
+                        )}
                     </TooltipContentBody>
                 </TooltipContentWrapper>} />
         </EmojiSelector>
