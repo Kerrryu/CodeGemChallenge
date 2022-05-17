@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
+
 import { Card, CardHeader, CardBody, CardSection, CardFooter, CardInfo } from "./components/card";
 import { Selector } from "./components/emoji-selector";
 import { Selector as TagSelector } from "./components/tag-selector";
 import { Button, ButtonContainer } from "./components/button";
+import { Streak } from "./components/streak";
 import ApiService from "./services/api";
 import FeedbackValidator from "./validators/feedback";
 import { Container } from './components/container';
@@ -32,6 +34,8 @@ const App = () => {
     let [saving, setSaving] = useState(false);
     let [errors, setErrors] = useState(null);
     let [showSuccess, setShowSuccess] = useState(false);
+    let [showDiary, setShowDiary] = useState(false);
+    let [streak, setStreak] = useState("1");
 
     const onTagClicked = (tag) => {
         tag.active = !tag.active;
@@ -54,6 +58,20 @@ const App = () => {
     const removeTag = (tag) => {
         onTagClicked(tag);
     };
+
+    const toggleDiary = () => {
+        setShowDiary(!showDiary);
+    }
+
+    const pullStreak = () => {
+        fetch("http://localhost:3000/testConsecutive")
+            .then(response => response.text())
+            .then(text => {
+                setStreak(text);
+            })
+            .catch(error => console.error(error));
+    }
+    pullStreak();
 
     const submitForm = () => {
         let formValid = FeedbackValidator.validate(feedback, moods, tags);
@@ -80,6 +98,9 @@ const App = () => {
     };
 
     return (
+        <>
+        {
+        !showDiary ? (
         <Card>
             <Toast content="Your feedback has been submitted successfully." show={showSuccess} />
             <CardHeader dismissible>
@@ -110,11 +131,46 @@ const App = () => {
             </CardBody>
             <CardFooter>
                 <ButtonContainer>
-                    <Button primary disabled={saving}>My Diary</Button>
+                    <Button primary onClick={toggleDiary} disabled={saving}>My Diary</Button>
                     <Button onClick={submitForm} disabled={saving}>Submit</Button>
                 </ButtonContainer>
             </CardFooter>
-        </Card>
+            </Card>
+            ) : (
+            <Card>
+                <CardHeader dismissible>
+                    My Log
+                </CardHeader>
+                <CardBody>
+                    <CardSection>
+                        <CardInfo>
+                            <Streak
+                                title={"Daily Checkin"}
+                                content={streak > 1 ? "Finished!" : "Incomplete"}
+                                backgroundcolor={streak == 1 ? "#FE7690" : "#03DAC5"}
+                            />
+                            <Streak
+                                title={"Current Streak"}
+                                content={streak + " Days 🔥"}
+                                backgroundcolor="#537DEF"
+                            />
+                            <Streak
+                                title={"Longest Streak"}
+                                content={streak + " Days"}
+                                backgroundcolor="#9EA2FF"
+                            />
+                        </CardInfo>
+                    </CardSection>
+                </CardBody>
+                <CardFooter>
+                    <ButtonContainer>
+                        <Button primary onClick={toggleDiary}>Let's Reflect</Button>
+                    </ButtonContainer>
+                </CardFooter>
+            </Card>
+            )
+            }
+        </>
     );
 };
 
@@ -140,6 +196,7 @@ let listener = div.addEventListener("click", (e) => {
         div.removeEventListener("click", listener);
     }
 });
+
 
 document.body.appendChild(div);
 
