@@ -72,6 +72,11 @@ class FeedbackService {
                 } else {
                     count = 1;
                 }
+
+                // Reset count if last feedback is on a weekend
+                if(getWeekDay(Date.parse(feedbacks[i].createdat) == "SA" || getWeekDay(Date.parse(feedbacks[i].createdat) == "SU"))) {
+                    count = 1;
+                }
             }
         }
 
@@ -113,6 +118,11 @@ class FeedbackService {
                 } else {
                     count = 1;
                 }
+            }
+
+            // Reset count if last feedback is on a weekend
+            if(getWeekDay(Date.parse(feedbacks[i].createdat) == "SA" || getWeekDay(Date.parse(feedbacks[i].createdat) == "SU"))) {
+                count = 1;
             }
         }
 
