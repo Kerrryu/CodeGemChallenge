@@ -25,3 +25,9 @@ Instead of adding a placeholder value here I simply removed the separate section
 
 - Cleaned up some more css on the card to remove any weird looking whitespace or issues that are there.
 
+Answers to questions about challenge:
+- This took around 5 hours of development time total
+- I learnt some that there is always room for improvement when it comes to user experience, I experienced this when adding some small quality of life changes like the emoji selector removing emojis after they have been selected.
+- I had a debate of implementing bootstrap via reactstrap so that I can get the 3 boxes on the diary page to be side by side just like in figma but due to time constraints this was going to require some more work such as moving things around and making sure the content in the boxes fit as when I tried it only fit 2 boxes side by side which means some adjustments would be required.
+- For sure sync the volume for the docker container for api, this would make it faster to test endpoints and allow for faster testing as opposed to rebooting the container every time to apply changes. Same thing for the database, I would introduce migration files to help with modifying table structures as I needed to take down the docker container completely to rebuild it after making a modification to the sql file.
+- If I had more time I would've implemented the calendar system, improved the styling a ton especially with a common library like bootstrap or such to help organize things better and make it look nicer overall. I would've also made the diary page more interactive so you can access data more and even remove feedback you may no longer want or you don't want managers to see due to accidental submission.
