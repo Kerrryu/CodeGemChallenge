@@ -14,6 +14,8 @@ See: https://codegem.notion.site/Engineering-Challenge-fb62fc4e542d462da61e064de
 
 ### Notes
 
+Resume development at 3:21 AM Tue May 17th 2022 since last push
+
 Potential changes:
 - When selecting a mood, remove emoji from context menu || (Very easy and quick add)
 This was a very quick change which I implemented using a ternary conditional to check if the emoji was located in the selected list. I believe this cleans up the mood checker a little more and gives the user a cleaner experience
