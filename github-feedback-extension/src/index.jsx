@@ -6,6 +6,7 @@ import { Selector } from "./components/emoji-selector";
 import { Selector as TagSelector } from "./components/tag-selector";
 import { Button, ButtonContainer } from "./components/button";
 import { Streak } from "./components/streak";
+import { CheckinList } from './components/checkinlist';
 import ApiService from "./services/api";
 import FeedbackValidator from "./validators/feedback";
 import { Container } from './components/container';
@@ -159,6 +160,14 @@ const App = () => {
                                 content={streak + " Days"}
                                 backgroundcolor="#9EA2FF"
                             />
+                        </CardInfo>
+                    </CardSection>
+
+                    <hr></hr>
+
+                    <CardSection>
+                        <CardInfo>
+                            <CheckinList></CheckinList>
                         </CardInfo>
                     </CardSection>
                 </CardBody>
