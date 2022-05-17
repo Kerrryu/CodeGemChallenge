@@ -24,6 +24,14 @@ class KnexProvider extends DatabaseProvider {
         throw Error("Not implemented");
     }
 
+    all(table) {
+        return this.client(table).select("*");
+    }
+
+    fetchFeedback() {
+        return this.client.select("*").from("feedback").join("mood", "feedback.id", "mood.feedback_id").join("tag", "feedback.id", "tag.feedback_id");
+    }
+
     add(table, entity) {
         return this.client(table).returning("id").insert(entity);
     }

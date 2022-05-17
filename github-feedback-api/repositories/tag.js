@@ -14,6 +14,10 @@ class TagRepository {
         return this.dbProvider.addMany(this.tableName, tags.map(tag => this._getInsertOrUpdateEntity(tag)));
     }
 
+    getTagsByFeedbackId(feedbackId) {
+        return this.dbProvider.select(this.tableName).where({ feedback_id: feedbackId });
+    }
+
     _getInsertOrUpdateEntity({ feedbackId, id, ...props }) {
         let result = {feedback_id: feedbackId, ...props};
 

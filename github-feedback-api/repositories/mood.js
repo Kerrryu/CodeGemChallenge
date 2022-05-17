@@ -14,6 +14,10 @@ class MoodRepository {
         return this.dbProvider.addMany(this.tableName, moods.map(mood => this._getInsertOrUpdateEntity(mood)));
     }
 
+    getMoodsByFeedbackId(feedbackId) {
+        return this.dbProvider.select(this.tableName).where({ feedback_id: feedbackId });
+    }
+
     _getInsertOrUpdateEntity({ feedbackId, id, ...props }) {
         let result = {feedback_id: feedbackId, ...props};
 

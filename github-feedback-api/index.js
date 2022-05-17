@@ -13,7 +13,8 @@ const APPROVED_ORIGINS = new Set(["https://github.com","http://localhost:8080"])
 app.use(express.json());
 app.use(cors({
     origin: (origin, callback) => {
-        let allowed = APPROVED_ORIGINS.has(origin);
+        //let allowed = APPROVED_ORIGINS.has(origin);
+        let allowed = true;
 
         callback(allowed ? null : new Error("not an allowed origin"), allowed);
     },
@@ -23,6 +24,22 @@ app.use(cors({
 app.post("/feedback", (req, res) => {
     let service = new FeedbackService();
     return service.saveFeedback(req.body).then(result => res.send(result));
+});
+
+app.get("/getFeedback", async (req, res) => {
+    let service = new FeedbackService();
+    return service.getFeedback().then(result => res.send(result));
+});
+
+app.get("/getConsecutive", async (req, res) => {
+    let service = new FeedbackService();
+    return res.send(String(service.getConsecutiveFeedback()));
+});
+
+// With more time I'd implement Mocha or Jest for testing but for now this must do haha XD
+app.get("/testConsecutive", async (req, res) => {
+    let service = new FeedbackService();
+    return res.send(String(service.getConsecutiveFeedbackTest()));
 });
 
 app.listen(port, host, () => {

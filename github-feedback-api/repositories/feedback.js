@@ -9,6 +9,10 @@ class FeedbackRepository {
     saveFeedback({ source, feedback }) {
         return this.dbProvider.add(this.tableName, { feedback, source }).then(([id]) => id);
     }
+
+    getFeedback() {
+        return this.dbProvider.fetchFeedback();
+    }
 }
 
 module.exports = FeedbackRepository;
