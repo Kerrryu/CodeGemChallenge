@@ -46,6 +46,14 @@ module.exports = {
                 use: {
                     loader: 'url-loader',
                 }
+            },
+            {
+              test: /\.html$/,
+              use: [
+                {
+                  loader: "html-loader"
+                }
+              ]
             }
         ],
     },
@@ -68,6 +76,10 @@ module.exports = {
         }),
         new ESLintPlugin({
             extensions: ["js", "jsx"]
+        }),
+        new HtmlWebPackPlugin({
+            template: "./public/index.html",
+            filename: "./index.html"
         })
     ],
 };
