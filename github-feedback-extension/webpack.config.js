@@ -2,6 +2,7 @@ const path = require("path");
 const CopyPlugin = require("copy-webpack-plugin");
 const webpack = require("webpack");
 const ESLintPlugin = require('eslint-webpack-plugin');
+const HtmlWebPackPlugin = require('html-webpack-plugin');
 
 module.exports = {
     entry: {
@@ -78,7 +79,7 @@ module.exports = {
             extensions: ["js", "jsx"]
         }),
         new HtmlWebPackPlugin({
-            template: "./public/index.html",
+            template: "./src/index.html",
             filename: "./index.html"
         })
     ],
